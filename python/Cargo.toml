@@ -17,6 +17,7 @@ features = ["extension-module"]
 [dependencies.deltalake]
 path = "../rust"
 version = "0.*"
+features = ["python"]
 
 [package.metadata.maturin]
 classifier = [
@@ -26,7 +27,7 @@ classifier = [
 ]
 project-url = ["Repo, https://github.com/delta-io/delta.rs"]
 requires-dist = [
-    "pyarrow>2",
+    "pyarrow>=2",
     "pandas; extra =='pandas'",
     "pytest; extra == 'devel'",
     "pytest-mock; extra == 'devel'"

@@ -79,6 +79,21 @@ pub enum DeltaTableError {
     },
 }
 
+#[cfg(feature = "python")]
+pub mod python {
+    extern crate pyo3;
+    use self::pyo3::create_exception;
+    use self::pyo3::exceptions::PyException;
+
+    create_exception!(deltalake, PyDeltaTableError, PyException);
+
+    impl From<super::DeltaTableError> for pyo3::PyErr {
+        fn from(err: super::DeltaTableError) -> pyo3::PyErr {
+            PyDeltaTableError::new_err(err.to_string())
+        }
+    }
+}
+
 pub struct DeltaTableMetaData {
     // Unique identifier for this table
     pub id: GUID,
